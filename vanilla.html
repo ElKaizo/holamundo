@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VanillaJS Ejercicios</title>
+<style>
+    /* Estilos para el círculo rebotante */
+    .container {
+        width: 500px;
+        height: 500px;
+        position: relative;
+        border: 1px solid #ccc;
+        overflow: hidden;
+    }
+    .circle {
+        width: 50px;
+        height: 50px;
+        background-color: #3498db;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 0;
+        animation: bounce 1s infinite alternate;
+    }
+    @keyframes bounce {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-450px); /* 500px container height - 50px circle height */
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Formulario para suma de dos números -->
+<form id="sumForm">
+    <label for="num1">Número 1:</label>
+    <input type="number" id="num1" name="num1" required>
+    <br><br>
+    <label for="num2">Número 2:</label>
+    <input type="number" id="num2" name="num2" required>
+    <br><br>
+    <button type="submit">Sumar</button>
+</form>
+<h1 id="sumResult"></h1>
+
+<script>
+    const sumForm = document.getElementById('sumForm');
+    const sumResult = document.getElementById('sumResult');
+
+    sumForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const num1 = parseInt(document.getElementById('num1').value);
+        const num2 = parseInt(document.getElementById('num2').value);
+        
+        if (!isNaN(num1) && !isNaN(num2)) {
+            const result = num1 + num2;
+            sumResult.textContent = `Resultado: ${result}`;
+        } else {
+            sumResult.textContent = "Por favor ingresa números válidos.";
+        }
+    });
+</script>
+
+<!-- Formulario para lista -->
+<form id="listForm">
+    <label for="listItem">Nuevo elemento:</label>
+    <input type="text" id="listItem" name="listItem">
+    <br><br>
+    <button type="button" onclick="addItem()">Agregar</button>
+</form>
+<ul id="myList"></ul>
+
+<script>
+    const listForm = document.getElementById('listForm');
+    const myList = document.getElementById('myList');
+
+    function addItem() {
+        const newItem = document.getElementById('listItem').value.trim();
+        if (newItem !== '') {
+            const li = document.createElement('li');
+            li.textContent = newItem;
+            myList.appendChild(li);
+            document.getElementById('listItem').value = '';
+        } else {
+            alert('Por favor ingresa un dato válido.');
+        }
+    }
+</script>
+
+<!-- Contenedor con círculo rebotante -->
+<div class="container">
+    <div class="circle"></div>
+</div>
+
+</body>
+</html>
